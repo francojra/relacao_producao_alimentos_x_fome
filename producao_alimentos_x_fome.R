@@ -36,7 +36,7 @@ fome <- read.csv("prevalence-of-undernourishment.csv")
 view(fome)
 names(fome)
 
-# Manipular dados --------------------------------------------------------------------------------------------------------------------------
+# Manipular dados 1 --------------------------------------------------------------------------------------------------------------------------
 
 carne <- carne %>%
   select(-Code) %>%
@@ -77,3 +77,21 @@ fome <- fome %>%
          between(Year, 2001, 2019)) %>%
   rename(porc_subnut = Prevalence.of.undernourishment....of.population.) %>%
   view()
+
+# Unir tabelas -----------------------------------------------------------------------------------------------------------------------------
+
+carne_fome <- right_join(carne, fome, by = c("Entity", "Year"))
+view(carne_fome)
+
+trigo_fome <- right_join(trigo, fome, by = c("Entity", "Year"))
+view(trigo_fome)
+
+arroz_fome <- right_join(arroz, fome, by = c("Entity", "Year"))
+view(arroz_fome)
+
+batata_fome <- right_join(batata, fome, by = c("Entity", "Year"))
+view(batata_fome)
+
+# Manipular dados 2 ------------------------------------------------------------------------------------------------------------------------
+
+
