@@ -11,4 +11,26 @@
 
 # Período ----------------------------------------------------------------------------------------------------------------------------------
 
+### De 2001 a 2019
+
+# Carregar pacotes -------------------------------------------------------------------------------------------------------------------------
+
+library(tidyverse)
+library(cols4all)
+
+# Carregar tabelas -------------------------------------------------------------------------------------------------------------------------
+
+carne <- read.csv("meat-production-tonnes.csv")
+view(carne)
+trigo <- read.csv("wheat-production.csv")
+view(trigo)
+arroz <- read.csv("rice-production.csv")
+view(arroz)
+batata <- read.csv("potato-production.csv")
+view(batata)
+fome <- read.csv("prevalence-of-undernourishment.csv")
+view(fome)
+
+# Manipular dados --------------------------------------------------------------------------------------------------------------------------
+
 
