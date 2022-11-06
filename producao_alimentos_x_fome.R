@@ -39,40 +39,35 @@ names(fome)
 
 carne <- carne %>%
   select(-Code) %>%
-  filter(Entity %in% c("India", "China", "Brazil", "United States", 
-                       "Mexico", "Russia"),
+  filter(Entity %in% c("China", "Brazil", "United States"),
          between(Year, 2001, 2019)) %>%
   rename(prod_carne = Meat..total...00001765....Production...005510....tonnes) %>%
   view()
   
 trigo <- trigo %>%
   select(-Code) %>%
-  filter(Entity %in% c("India", "China", "Brazil", "United States", 
-                       "Mexico", "Russia"),
+  filter(Entity %in% c("China", "Brazil", "United States"),
          between(Year, 2001, 2019)) %>%
   rename(prod_trigo = Wheat...00000015....Production...005510....tonnes) %>%
   view()
 
 arroz <- arroz %>%
   select(-Code) %>%
-  filter(Entity %in% c("India", "China", "Brazil", "United States", 
-                       "Mexico", "Russia"),
+  filter(Entity %in% c("China", "Brazil", "United States"),
          between(Year, 2001, 2019)) %>%
   rename(prod_arroz = Rice...00000027....Production...005510....tonnes) %>%
   view()
 
 batata <- batata %>%
   select(-Code) %>%
-  filter(Entity %in% c("India", "China", "Brazil", "United States", 
-                       "Mexico", "Russia"),
+  filter(Entity %in% c("China", "Brazil", "United States"),
          between(Year, 2001, 2019)) %>%
   rename(prod_batata = Potatoes...00000116....Production...005510....tonnes) %>%
   view()
 
 fome <- fome %>%
   select(-Code) %>%
-  filter(Entity %in% c("India", "China", "Brazil", "United States", 
-                       "Mexico", "Russia"),
+  filter(Entity %in% c("China", "Brazil", "United States"),
          between(Year, 2001, 2019)) %>%
   rename(porc_subnut = Prevalence.of.undernourishment....of.population.) %>%
   view()
@@ -91,14 +86,27 @@ view(arroz_fome)
 batata_fome <- right_join(batata, fome, by = c("Entity", "Year"))
 view(batata_fome)
 
-# Manipular dados 2 ------------------------------------------------------------------------------------------------------------------------
+# Gráficos ---------------------------------------------------------------------------------------------------------------------------------
 
-carne_fome1 <- carne_fome %>%
-  group_by(Entity) %>%
-  summarise(media_prod_carne = mean(prod_carne),
-            media_porc_subnut = mean(porc_subnut)) %>%
-  view()
+g1 <- ggplot(carne_fome, aes(x = Year, y = porc_subnut,
+                        color = Entity, size = prod_carne)) +
+  geom_point() 
+g1
 
-ggplot(carne_fome1, aes(x = media_prod_carne, y = media_porc_subnut,
+g2 <- ggplot(trigo_fome, aes(x = prod_trigo, y = porc_subnut,
                         label = Entity)) +
-  geom_label(size = 4)
+  geom_label(size = 5)
+g2
+
+g3 <- ggplot(arroz_fome, aes(x = prod_arroz, y = porc_subnut,
+                        label = Entity)) +
+  geom_label(size = 5)
+g3
+
+g4 <- ggplot(batata_fome, aes(x = prod_batata, y = porc_subnut,
+                        label = Entity)) +
+  geom_label(size = 5)
+g4
+
+
+
