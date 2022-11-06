@@ -6,8 +6,7 @@
 
 # Países incluídos nas análises ------------------------------------------------------------------------------------------------------------
 
-### India, China, Estados Unidos, Brasil, Russia, México,
-### Espanha, Argentina e Canada.
+### India, China, Estados Unidos, Brasil, Russia, México.
 
 # Período ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -41,7 +40,7 @@ names(fome)
 carne <- carne %>%
   select(-Code) %>%
   filter(Entity %in% c("India", "China", "Brazil", "United States", 
-                       "Mexico", "Spain", "Russia", "Canada", "Argentina"),
+                       "Mexico", "Russia"),
          between(Year, 2001, 2019)) %>%
   rename(prod_carne = Meat..total...00001765....Production...005510....tonnes) %>%
   view()
@@ -49,7 +48,7 @@ carne <- carne %>%
 trigo <- trigo %>%
   select(-Code) %>%
   filter(Entity %in% c("India", "China", "Brazil", "United States", 
-                       "Mexico", "Spain", "Russia", "Canada", "Argentina"),
+                       "Mexico", "Russia"),
          between(Year, 2001, 2019)) %>%
   rename(prod_trigo = Wheat...00000015....Production...005510....tonnes) %>%
   view()
@@ -57,7 +56,7 @@ trigo <- trigo %>%
 arroz <- arroz %>%
   select(-Code) %>%
   filter(Entity %in% c("India", "China", "Brazil", "United States", 
-                       "Mexico", "Spain", "Russia", "Canada", "Argentina"),
+                       "Mexico", "Russia"),
          between(Year, 2001, 2019)) %>%
   rename(prod_arroz = Rice...00000027....Production...005510....tonnes) %>%
   view()
@@ -65,7 +64,7 @@ arroz <- arroz %>%
 batata <- batata %>%
   select(-Code) %>%
   filter(Entity %in% c("India", "China", "Brazil", "United States", 
-                       "Mexico", "Spain", "Russia", "Canada", "Argentina"),
+                       "Mexico", "Russia"),
          between(Year, 2001, 2019)) %>%
   rename(prod_batata = Potatoes...00000116....Production...005510....tonnes) %>%
   view()
@@ -73,7 +72,7 @@ batata <- batata %>%
 fome <- fome %>%
   select(-Code) %>%
   filter(Entity %in% c("India", "China", "Brazil", "United States", 
-                       "Mexico", "Spain", "Russia", "Canada", "Argentina"),
+                       "Mexico", "Russia"),
          between(Year, 2001, 2019)) %>%
   rename(porc_subnut = Prevalence.of.undernourishment....of.population.) %>%
   view()
@@ -94,4 +93,12 @@ view(batata_fome)
 
 # Manipular dados 2 ------------------------------------------------------------------------------------------------------------------------
 
+carne_fome1 <- carne_fome %>%
+  group_by(Entity) %>%
+  summarise(media_prod_carne = mean(prod_carne),
+            media_porc_subnut = mean(porc_subnut)) %>%
+  view()
 
+ggplot(carne_fome1, aes(x = media_prod_carne, y = media_porc_subnut,
+                        label = Entity)) +
+  geom_label(size = 4)
