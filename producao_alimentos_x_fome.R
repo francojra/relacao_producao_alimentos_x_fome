@@ -16,6 +16,7 @@
 
 library(tidyverse)
 library(cols4all)
+library(gridExtra)
 
 # Carregar tabelas -------------------------------------------------------------------------------------------------------------------------
 
@@ -103,7 +104,9 @@ g1 <- ggplot(carne_fome, aes(x = Year, y = porc_subnut,
   theme(axis.title = element_text(size = 18),
         axis.text = element_text(color = "black", size = 15),
         legend.text = element_text(size = 13),
-        legend.title = element_text(size = 13)) +
+        legend.title = element_text(size = 13),
+        legend.position = c(0.8, 0.7),
+        legend.background = element_blank()) +
   guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
 g1
 
@@ -119,7 +122,9 @@ g2 <- ggplot(trigo_fome, aes(x = Year, y = porc_subnut,
   theme(axis.title = element_text(size = 18),
         axis.text = element_text(color = "black", size = 15),
         legend.text = element_text(size = 13),
-        legend.title = element_text(size = 13)) +
+        legend.title = element_text(size = 13),
+        legend.position = c(0.8, 0.7),
+        legend.background = element_blank()) +
   guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
 g2
 
@@ -135,7 +140,9 @@ g3 <- ggplot(arroz_fome, aes(x = Year, y = porc_subnut,
   theme(axis.title = element_text(size = 18),
         axis.text = element_text(color = "black", size = 15),
         legend.text = element_text(size = 13),
-        legend.title = element_text(size = 13)) +
+        legend.title = element_text(size = 13),
+        legend.position = c(0.8, 0.7),
+        legend.background = element_blank()) +
   guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
 g3
 
@@ -151,6 +158,10 @@ g4 <- ggplot(batata_fome, aes(x = Year, y = porc_subnut,
   theme(axis.title = element_text(size = 18),
         axis.text = element_text(color = "black", size = 15),
         legend.text = element_text(size = 13),
-        legend.title = element_text(size = 13)) +
+        legend.title = element_text(size = 13),
+        legend.position = c(0.8, 0.7),
+        legend.background = element_blank()) +
   guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
 g4
+
+grid.arrange(g1, g2, g3, g4) # 12 - 17
