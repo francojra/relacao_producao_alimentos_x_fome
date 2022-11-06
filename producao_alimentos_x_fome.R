@@ -6,7 +6,8 @@
 
 # Países incluídos nas análises ------------------------------------------------------------------------------------------------------------
 
-### China, Estados Unidos e Brasil
+### China, Índia, Estados Unidos, Indonésia, Paquistão,
+### Nigéria, Brasil, Bangladesh, Rússia, e México.
 
 # Período ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -23,9 +24,9 @@ library(gridExtra)
 carne <- read.csv("meat-production-tonnes.csv")
 view(carne)
 names(carne)
-trigo <- read.csv("wheat-production.csv")
-view(trigo)
-names(trigo)
+milho <- read.csv("maize-production.csv")
+view(milho)
+names(milho)
 arroz <- read.csv("rice-production.csv")
 view(arroz)
 names(arroz)
@@ -40,35 +41,45 @@ names(fome)
 
 carne <- carne %>%
   select(-Code) %>%
-  filter(Entity %in% c("China", "Brazil", "United States"),
+  filter(Entity %in% c("China", "Brazil", "United States", "Mexico",
+                       "Bangladesh", "Pakistan", "Nigeria", "Russia",
+                       "Indonesia", "India"),
          between(Year, 2001, 2019)) %>%
   rename(prod_carne = Meat..total...00001765....Production...005510....tonnes) %>%
   view()
   
-trigo <- trigo %>%
+milho <- milho %>%
   select(-Code) %>%
-  filter(Entity %in% c("China", "Brazil", "United States"),
+  filter(Entity %in% c("China", "Brazil", "United States", "Mexico",
+                       "Bangladesh", "Pakistan", "Nigeria", "Russia",
+                       "Indonesia", "India"),
          between(Year, 2001, 2019)) %>%
-  rename(prod_trigo = Wheat...00000015....Production...005510....tonnes) %>%
+  rename(prod_milho = Maize...00000056....Production...005510....tonnes) %>%
   view()
 
 arroz <- arroz %>%
   select(-Code) %>%
-  filter(Entity %in% c("China", "Brazil", "United States"),
+  filter(Entity %in% c("China", "Brazil", "United States", "Mexico",
+                       "Bangladesh", "Pakistan", "Nigeria", "Russia",
+                       "Indonesia", "India"),
          between(Year, 2001, 2019)) %>%
   rename(prod_arroz = Rice...00000027....Production...005510....tonnes) %>%
   view()
 
 batata <- batata %>%
   select(-Code) %>%
-  filter(Entity %in% c("China", "Brazil", "United States"),
+  filter(Entity %in% c("China", "Brazil", "United States", "Mexico",
+                       "Bangladesh", "Pakistan", "Nigeria", "Russia",
+                       "Indonesia", "India"),
          between(Year, 2001, 2019)) %>%
   rename(prod_batata = Potatoes...00000116....Production...005510....tonnes) %>%
   view()
 
 fome <- fome %>%
   select(-Code) %>%
-  filter(Entity %in% c("China", "Brazil", "United States"),
+  filter(Entity %in% c("China", "Brazil", "United States", "Mexico",
+                       "Bangladesh", "Pakistan", "Nigeria", "Russia",
+                       "Indonesia", "India"),
          between(Year, 2001, 2019)) %>%
   rename(porc_subnut = Prevalence.of.undernourishment....of.population.) %>%
   view()
@@ -78,8 +89,8 @@ fome <- fome %>%
 carne_fome <- right_join(carne, fome, by = c("Entity", "Year"))
 view(carne_fome)
 
-trigo_fome <- right_join(trigo, fome, by = c("Entity", "Year"))
-view(trigo_fome)
+milho_fome <- right_join(milho, fome, by = c("Entity", "Year"))
+view(milho_fome)
 
 arroz_fome <- right_join(arroz, fome, by = c("Entity", "Year"))
 view(arroz_fome)
@@ -110,13 +121,13 @@ g1 <- ggplot(carne_fome, aes(x = Year, y = porc_subnut,
   guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
 g1
 
-g2 <- ggplot(trigo_fome, aes(x = Year, y = porc_subnut,
-                        color = Entity, size = prod_trigo)) +
+g2 <- ggplot(milho_fome, aes(x = Year, y = porc_subnut,
+                        color = Entity, size = prod_milho)) +
   geom_point() +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"),
                      labels = c("Brasil", "China", "Estados Unidos")) +
   scale_size_continuous(labels = scales::comma, 
-                        name = "Produção de trigo\n em toneladas") +
+                        name = "Produção de milho\n em toneladas") +
   labs(x = "Tempo (anos)", y = "Subnutrição (%)", col = "Países") +
   theme_light() +
   theme(axis.title = element_text(size = 18),
