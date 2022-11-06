@@ -107,6 +107,50 @@ g1 <- ggplot(carne_fome, aes(x = Year, y = porc_subnut,
   guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
 g1
 
+g2 <- ggplot(trigo_fome, aes(x = Year, y = porc_subnut,
+                        color = Entity, size = prod_trigo)) +
+  geom_point() +
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"),
+                     labels = c("Brasil", "China", "Estados Unidos")) +
+  scale_size_continuous(labels = scales::comma, 
+                        name = "Produção de trigo\n em toneladas") +
+  labs(x = "Tempo (anos)", y = "Subnutrição (%)", col = "Países") +
+  theme_light() +
+  theme(axis.title = element_text(size = 18),
+        axis.text = element_text(color = "black", size = 15),
+        legend.text = element_text(size = 13),
+        legend.title = element_text(size = 13)) +
+  guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
+g2
 
+g3 <- ggplot(arroz_fome, aes(x = Year, y = porc_subnut,
+                        color = Entity, size = prod_arroz)) +
+  geom_point() +
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"),
+                     labels = c("Brasil", "China", "Estados Unidos")) +
+  scale_size_continuous(labels = scales::comma, 
+                        name = "Produção de arroz\n em toneladas") +
+  labs(x = "Tempo (anos)", y = "Subnutrição (%)", col = "Países") +
+  theme_light() +
+  theme(axis.title = element_text(size = 18),
+        axis.text = element_text(color = "black", size = 15),
+        legend.text = element_text(size = 13),
+        legend.title = element_text(size = 13)) +
+  guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
+g3
 
-
+g4 <- ggplot(batata_fome, aes(x = Year, y = porc_subnut,
+                        color = Entity, size = prod_batata)) +
+  geom_point() +
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"),
+                     labels = c("Brasil", "China", "Estados Unidos")) +
+  scale_size_continuous(labels = scales::comma, 
+                        name = "Produção de batata\n em toneladas") +
+  labs(x = "Tempo (anos)", y = "Subnutrição (%)", col = "Países") +
+  theme_light() +
+  theme(axis.title = element_text(size = 18),
+        axis.text = element_text(color = "black", size = 15),
+        legend.text = element_text(size = 13),
+        legend.title = element_text(size = 13)) +
+  guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
+g4
