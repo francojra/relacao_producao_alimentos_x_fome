@@ -6,8 +6,7 @@
 
 # Países incluídos nas análises ------------------------------------------------------------------------------------------------------------
 
-### China, Índia, Estados Unidos, Indonésia, Paquistão,
-### Nigéria, Brasil, Bangladesh, Rússia, e México.
+### China, Índia, Estados Unidos, Indonésia, Paquistão e Brasil.
 
 # Período ----------------------------------------------------------------------------------------------------------------------------------
 
@@ -18,6 +17,8 @@
 library(tidyverse)
 library(cols4all)
 library(gridExtra)
+devtools::install_github('cttobin/ggthemr')
+library(ggthemr)
 
 # Carregar tabelas -------------------------------------------------------------------------------------------------------------------------
 
@@ -41,45 +42,40 @@ names(fome)
 
 carne <- carne %>%
   select(-Code) %>%
-  filter(Entity %in% c("China", "Brazil", "United States", "Mexico",
-                       "Bangladesh", "Pakistan", "Nigeria", "Russia",
-                       "Indonesia", "India"),
+  filter(Entity %in% c("China", "Brazil", "United States",
+                       "Pakistan","Indonesia", "India"),
          between(Year, 2001, 2019)) %>%
   rename(prod_carne = Meat..total...00001765....Production...005510....tonnes) %>%
   view()
   
 milho <- milho %>%
   select(-Code) %>%
-  filter(Entity %in% c("China", "Brazil", "United States", "Mexico",
-                       "Bangladesh", "Pakistan", "Nigeria", "Russia",
-                       "Indonesia", "India"),
+  filter(Entity %in% c("China", "Brazil", "United States", 
+                       "Pakistan",  "Indonesia", "India"),
          between(Year, 2001, 2019)) %>%
   rename(prod_milho = Maize...00000056....Production...005510....tonnes) %>%
   view()
 
 arroz <- arroz %>%
   select(-Code) %>%
-  filter(Entity %in% c("China", "Brazil", "United States", "Mexico",
-                       "Bangladesh", "Pakistan", "Nigeria", "Russia",
-                       "Indonesia", "India"),
+  filter(Entity %in% c("China", "Brazil", "United States", 
+                       "Pakistan", "Indonesia", "India"),
          between(Year, 2001, 2019)) %>%
   rename(prod_arroz = Rice...00000027....Production...005510....tonnes) %>%
   view()
 
 batata <- batata %>%
   select(-Code) %>%
-  filter(Entity %in% c("China", "Brazil", "United States", "Mexico",
-                       "Bangladesh", "Pakistan", "Nigeria", "Russia",
-                       "Indonesia", "India"),
+  filter(Entity %in% c("China", "Brazil", "United States", 
+                       "Pakistan", "Indonesia", "India"),
          between(Year, 2001, 2019)) %>%
   rename(prod_batata = Potatoes...00000116....Production...005510....tonnes) %>%
   view()
 
 fome <- fome %>%
   select(-Code) %>%
-  filter(Entity %in% c("China", "Brazil", "United States", "Mexico",
-                       "Bangladesh", "Pakistan", "Nigeria", "Russia",
-                       "Indonesia", "India"),
+  filter(Entity %in% c("China", "Brazil", "United States", 
+                       "Pakistan", "Indonesia", "India"),
          between(Year, 2001, 2019)) %>%
   rename(porc_subnut = Prevalence.of.undernourishment....of.population.) %>%
   view()
@@ -103,9 +99,12 @@ view(batata_fome)
 c4a_gui()
 c4a("Pastel", 10)
 
+ggthemr('earth') # tema do gráfico
+
 g1 <- ggplot(carne_fome, aes(x = Year, y = porc_subnut,
-                        color = Entity, size = prod_carne)) +
-  geom_point() +
+                        color = Entity, size = prod_carne,
+                        group = Entity)) +
+  geom_line() +
   scale_color_manual(values = c("#66C5CC", "#F6CF71",
                                 "#F89C74", "#DCB0F2",
                                 "#87C55F", "#9EB9F3",
@@ -115,7 +114,6 @@ g1 <- ggplot(carne_fome, aes(x = Year, y = porc_subnut,
   scale_size_continuous(labels = scales::comma, 
                         name = "Produção de carne\n em toneladas") +
   labs(x = "Tempo (anos)", y = "Subnutrição (%)", col = "Países") +
-  theme_dark() +
   theme(axis.title = element_text(size = 18),
         axis.text = element_text(color = "black", size = 15),
         legend.text = element_text(size = 13),
@@ -126,10 +124,15 @@ g1 <- ggplot(carne_fome, aes(x = Year, y = porc_subnut,
 g1
 
 g2 <- ggplot(milho_fome, aes(x = Year, y = porc_subnut,
-                        color = Entity, size = prod_milho)) +
-  geom_point() +
-  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"),
-                     labels = c("Brasil", "China", "Estados Unidos")) +
+                        color = Entity, size = prod_milho,
+                        group = Entity)) +
+  geom_line() +
+  scale_color_manual(values = c("#66C5CC", "#F6CF71",
+                                "#F89C74", "#DCB0F2",
+                                "#87C55F", "#9EB9F3",
+                                "#FE88B1", "#C9DB74",
+                                "#8BE0A4", "#B497E7")) +
+                     #labels = c("Brasil", "China", "Estados Unidos")) +
   scale_size_continuous(labels = scales::comma, 
                         name = "Produção de milho\n em toneladas") +
   labs(x = "Tempo (anos)", y = "Subnutrição (%)", col = "Países") +
