@@ -172,7 +172,6 @@ g4 <- ggplot(batata_fome, aes(x = Year, y = porc_subnut,
   scale_size_continuous(labels = scales::comma, 
                         name = "Produção de batata\n em toneladas") +
   labs(x = "Tempo (anos)", y = "Subnutrição (%)", col = "Países") +
-  theme_light() +
   theme(axis.title = element_text(size = 16, color = "black"),
         axis.text = element_text(color = "black", size = 13),
         legend.text = element_text(size = 12, color = "black"),
@@ -182,4 +181,4 @@ g4 <- ggplot(batata_fome, aes(x = Year, y = porc_subnut,
   guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
 g4
 
-grid.arrange(g1, g2, g3, g4) # 12 - 17
+grid.arrange(g1, g2, g3, g4) # 12 - 18
