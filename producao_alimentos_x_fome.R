@@ -117,7 +117,7 @@ g1 <- ggplot(carne_fome, aes(x = Year, y = porc_subnut,
         legend.title = element_text(size = 12, color = "black"),
         legend.background = element_blank(),
         legend.key = element_blank()) +
-  guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
+   guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
 g1
 
 g2 <- ggplot(milho_fome, aes(x = Year, y = porc_subnut,
@@ -128,7 +128,8 @@ g2 <- ggplot(milho_fome, aes(x = Year, y = porc_subnut,
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", 
                                  "#E7298A", "#66A61E", "#E6AB02"),
                      labels = c("Brasil", "China", "Índia", 
-                                "Indonésia", "Paquistão", "Estados Unidos")) +
+                                "Indonésia", "Paquistão", "Estados Unidos"),
+                     guide = FALSE) +
   scale_size_continuous(labels = scales::comma, 
                         name = "Produção de milho\n em toneladas") +
   labs(x = "Tempo (anos)", y = "Subnutrição (%)", col = "Países") +
@@ -148,7 +149,8 @@ g3 <- ggplot(arroz_fome, aes(x = Year, y = porc_subnut,
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", 
                                  "#E7298A", "#66A61E", "#E6AB02"),
                      labels = c("Brasil", "China", "Índia", 
-                                "Indonésia", "Paquistão", "Estados Unidos")) +
+                                "Indonésia", "Paquistão", "Estados Unidos"),
+                     guide = FALSE) +
   scale_size_continuous(labels = scales::comma, 
                         name = "Produção de arroz\n em toneladas") +
   labs(x = "Tempo (anos)", y = "Subnutrição (%)", col = "Países") +
@@ -168,7 +170,8 @@ g4 <- ggplot(batata_fome, aes(x = Year, y = porc_subnut,
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", 
                                  "#E7298A", "#66A61E", "#E6AB02"),
                      labels = c("Brasil", "China", "Índia", 
-                                "Indonésia", "Paquistão", "Estados Unidos")) +
+                                "Indonésia", "Paquistão", "Estados Unidos"),
+                     guide = FALSE) +
   scale_size_continuous(labels = scales::comma, 
                         name = "Produção de batata\n em toneladas") +
   labs(x = "Tempo (anos)", y = "Subnutrição (%)", col = "Países") +
@@ -181,4 +184,5 @@ g4 <- ggplot(batata_fome, aes(x = Year, y = porc_subnut,
   guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
 g4
 
-grid.arrange(g1, g2, g3, g4) # 12 - 18
+grid.arrange(g1, g2, g3, g4, ncol = 2, nrow = 2) # 12 - 18
+
