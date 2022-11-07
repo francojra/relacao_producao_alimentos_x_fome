@@ -105,8 +105,9 @@ g1 <- ggplot(carne_fome, aes(x = Year, y = porc_subnut,
   geom_point() +
   geom_line(size = 0.5) +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", 
-                                 "#E7298A", "#66A61E", "#E6AB02")) +
-                     #labels = c("Brasil", "China", "Estados Unidos")) +
+                                 "#E7298A", "#66A61E", "#E6AB02"),
+                     labels = c("Brasil", "China", "Índia", 
+                                "Indonésia", "Paquistão", "Estados Unidos")) +
   scale_size_continuous(labels = scales::comma, 
                         name = "Produção de carne\n em toneladas") +
   labs(x = "Tempo (anos)", y = "Subnutrição (%)", col = "Países") +
@@ -125,8 +126,9 @@ g2 <- ggplot(milho_fome, aes(x = Year, y = porc_subnut,
   geom_point() +
   geom_line(size = 0.5) +
   scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", 
-                                 "#E7298A", "#66A61E", "#E6AB02")) +
-                     #labels = c("Brasil", "China", "Estados Unidos")) +
+                                 "#E7298A", "#66A61E", "#E6AB02"),
+                     labels = c("Brasil", "China", "Índia", 
+                                "Indonésia", "Paquistão", "Estados Unidos")) +
   scale_size_continuous(labels = scales::comma, 
                         name = "Produção de milho\n em toneladas") +
   labs(x = "Tempo (anos)", y = "Subnutrição (%)", col = "Países") +
@@ -142,36 +144,41 @@ g2
 g3 <- ggplot(arroz_fome, aes(x = Year, y = porc_subnut,
                         color = Entity, size = prod_arroz)) +
   geom_point() +
-  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"),
-                     labels = c("Brasil", "China", "Estados Unidos")) +
+  geom_line(size = 0.5) +
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", 
+                                 "#E7298A", "#66A61E", "#E6AB02"),
+                     labels = c("Brasil", "China", "Índia", 
+                                "Indonésia", "Paquistão", "Estados Unidos")) +
   scale_size_continuous(labels = scales::comma, 
                         name = "Produção de arroz\n em toneladas") +
   labs(x = "Tempo (anos)", y = "Subnutrição (%)", col = "Países") +
-  theme_light() +
-  theme(axis.title = element_text(size = 18),
-        axis.text = element_text(color = "black", size = 15),
-        legend.text = element_text(size = 13),
-        legend.title = element_text(size = 13),
-        legend.position = c(0.8, 0.7),
-        legend.background = element_blank()) +
+  theme(axis.title = element_text(size = 16, color = "black"),
+        axis.text = element_text(color = "black", size = 13),
+        legend.text = element_text(size = 12, color = "black"),
+        legend.title = element_text(size = 12, color = "black"),
+        legend.background = element_blank(),
+        legend.key = element_blank()) +
   guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
 g3
 
 g4 <- ggplot(batata_fome, aes(x = Year, y = porc_subnut,
                         color = Entity, size = prod_batata)) +
   geom_point() +
-  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3"),
-                     labels = c("Brasil", "China", "Estados Unidos")) +
+  geom_line(size = 0.5) +
+  scale_color_manual(values = c("#1B9E77", "#D95F02", "#7570B3", 
+                                 "#E7298A", "#66A61E", "#E6AB02"),
+                     labels = c("Brasil", "China", "Índia", 
+                                "Indonésia", "Paquistão", "Estados Unidos")) +
   scale_size_continuous(labels = scales::comma, 
                         name = "Produção de batata\n em toneladas") +
   labs(x = "Tempo (anos)", y = "Subnutrição (%)", col = "Países") +
   theme_light() +
-  theme(axis.title = element_text(size = 18),
-        axis.text = element_text(color = "black", size = 15),
-        legend.text = element_text(size = 13),
-        legend.title = element_text(size = 13),
-        legend.position = c(0.8, 0.7),
-        legend.background = element_blank()) +
+  theme(axis.title = element_text(size = 16, color = "black"),
+        axis.text = element_text(color = "black", size = 13),
+        legend.text = element_text(size = 12, color = "black"),
+        legend.title = element_text(size = 12, color = "black"),
+        legend.background = element_blank(),
+        legend.key = element_blank()) +
   guides(colour = guide_legend(override.aes = list(size = 2.3, stroke = 1.5)))
 g4
 
